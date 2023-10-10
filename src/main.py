@@ -10,14 +10,19 @@ class Tree:
     def __init__(self, root=None):
         self.root = root
 
-    def get_depth(self, n):
-        if not n:
-            return 0
+    def get_depth(self):
+        r = self.root
 
-        return 1 + max(self.get_depth(n.left), self.get_depth(n.right)) 
+        def get_d(n):
+            if not n:
+                return 0
 
-    def print_helper(self, n):
-        queue = deque([n])
+            return 1 + max(get_d(n.left), get_d(n.right)) 
+
+        return get_d(r)
+
+    def __str__(self):
+        queue = deque([self.root])
         s = []
 
         while queue:
@@ -35,14 +40,12 @@ class Tree:
 
         return ''.join(s)
 
-    def __str__(self):
-        return self.print_helper(self.root)
 
 def main():
     n = Node(1, Node(2, Node(4), Node(5)), Node(3))
     t = Tree(n)
     print(str(t))
-    print(t.get_depth(t.root))
+    print(t.get_depth())
 
 if __name__ == "__main__":
     main()
