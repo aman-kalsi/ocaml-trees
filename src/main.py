@@ -16,7 +16,6 @@ class Tree:
         def get_d(n):
             if not n:
                 return 0
-
             return 1 + max(get_d(n.left), get_d(n.right)) 
 
         return get_d(r)
